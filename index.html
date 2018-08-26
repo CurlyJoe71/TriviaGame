@@ -1,16 +1,65 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Trivia Game</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/reset.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
 </head>
+
 <body>
-    
+    <div class="container parent">
+        <div class="row">
+            <div class="spacer"></div>
+            <div id="titleDiv" class="child">
+                <div>
+                    <h1>Musical Theater Trivia!</h1>
+                </div>
+            </div>
+            <div class="button-spacer">
+                <button class="btn btn-warning">Start!</button>
+            </div>
+        </div>
+        <div class="row">
+            <div id="timer-display" class="timer-child">
+                <h3>5:00</h3>
+            </div>
+            <div id="sliding-object" class="sliding-child">
+                <h3 class="slide-left">o</h3>
+            </div>
+            <div class="spacer"></div>
+            <div id="questionDiv" class="child"></div>
+            <div class="spacer"></div>
+            <div id="aDiv" class="answer-child"></div>
+            <div id="bDiv" class="answer-child"></div>
+            <div id="cDiv" class="answer-child"></div>
+            <div id="dDiv" class="answer-child"></div>
+        </div>
+    </div>
+
+
+    <div class="row">
+    </div>
+
+
+
+
+
+
+
+
+    <!-- end of container div -->
+    </div>
+
     <script src="assets/javascript/game.js"></script>
 </body>
+
 </html>
