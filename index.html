@@ -10,7 +10,7 @@
         crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/reset.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
-    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lobster|Open+Sans:400,400i,600i,700" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
 </head>
@@ -25,15 +25,12 @@
                 </div>
             </div>
             <div class="button-spacer">
-                <button class="btn btn-warning">Start!</button>
+                <button type="button" class="btn btn-outline-info btn-lg">Start!</button>
             </div>
-        </div>
-        <div class="row">
-            <div id="timer-display" class="timer-child">
-                <h3>5:00</h3>
-            </div>
-            <div id="sliding-object" class="sliding-child">
-                <h3 class="slide-left">o</h3>
+
+            <div id="timer-display" class="timer-child"></div>
+            <div class="sliding-child">
+                <div id="sliding-object" class="slide-left">o</div>
             </div>
             <div class="spacer"></div>
             <div id="questionDiv" class="child"></div>
