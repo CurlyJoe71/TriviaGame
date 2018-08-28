@@ -159,10 +159,18 @@ $(document).ready(function () {
       shuffleFunction(currentQuestionArray);
       console.log(answerArray);
       $('#questionDiv').text(currentQuestionArray.question);
-      $('#aDiv').text('A. ' + currentQuestionArray[answerArray[0]]);
-      $('#bDiv').text('B. ' + currentQuestionArray[answerArray[1]]);
-      $('#cDiv').text('C. ' + currentQuestionArray[answerArray[2]]);
-      $('#dDiv').text('D. ' + currentQuestionArray[answerArray[3]]);
+      setTimeout(function() {
+        $('#aDiv').text('A. ' + currentQuestionArray[answerArray[0]]).attr('class', 'tracking-in-expand-fwd answer-child pointer');
+      }, 100);
+      setTimeout(function() {
+        $('#bDiv').text('B. ' + currentQuestionArray[answerArray[1]]).attr('class', 'tracking-in-expand-fwd answer-child pointer');
+      }, 400);
+      setTimeout(function() {
+        $('#cDiv').text('C. ' + currentQuestionArray[answerArray[2]]).attr('class', 'tracking-in-expand-fwd answer-child pointer');
+      }, 700);
+      setTimeout(function() {
+        $('#dDiv').text('D. ' + currentQuestionArray[answerArray[3]]).attr('class', 'tracking-in-expand-fwd answer-child pointer');
+      }, 1000);
       stopwatch.start();
       slidingObject.text('o');
       timerDisplay.text(currentTime);
