@@ -4,15 +4,14 @@ body {
 .parent {
     display: flex;
     height: 900px;
-    background: lavender;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    background: lavender;
   }
   
 .child {
     width: 100%;
-    height: 80px;
+    height: 100px;
     margin: auto;
     background: lightseagreen;
   }
@@ -21,10 +20,8 @@ body {
       height: 53px;
       width: 800px;
       margin: auto;
+      text-align: center;
       background: peru;
-  }
-  .btn {
-      /* font-size: 20px; */
   }
 
 .spacer {
@@ -40,36 +37,40 @@ body {
     height: 30px;
     width: 800px;
     margin: auto;
-    background: lightgoldenrodyellow;
+    /* background: lightgoldenrodyellow; */
     text-align: center;
 }
 
 h1 {
     font-family: 'Lobster', cursive;
     font-size: 80px;
-    background: lightpink;
     text-align: center;
+    /* background: lightpink; */
 }
 
 h3,
 #questionDiv {
-    font-family: 'Lobster', cursive;
-    font-size: 40px;
-    text-align: center;
-    width: 600px;
+
+  font-family: 'Lobster', cursive;
+  text-align: center;
+    font-size: 45px;
+    width: 800px;
 }
 
+#answer-display, 
 .answer-child {
     border-radius: 25px;
     width: 500px;
     height: 90px;
     margin: 15px auto;
     font-weight: bolder;
-    font-size: 30px;
+    font-size: 35px;
     padding: 25px;
     /* background: yellowgreen;  */
 }
-.answer-child:hover {
+.answer-child:{}
+
+.hover:hover {
     background-color: none;
     border: 3px solid lightcoral;
     -webkit-animation: text-pop-up-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
@@ -85,11 +86,9 @@ h3,
     font-size: 20px;
     text-align: center;
     height: 50px;
-    align-self: flex-end;
     width: 500px;
     margin: auto;
     background: lightskyblue;
-    
 }
 
 .slide-left {
