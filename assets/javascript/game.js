@@ -1,3 +1,17 @@
+var colorsAudio = document.getElementById('colors');
+var edelweissAudio = document.getElementById('edelweiss');
+var forGoodAudio = document.getElementById('forGood');
+var seasonsAudio = document.getElementById('seasons');
+var starsAudio = document.getElementById('stars');
+var currentAudio;
+
+var colorsGiphy = '"https://media.giphy.com/media/EiiKZ3IZf8Vzi/giphy.gif" "max-width:50px"';
+var forGoodGiphy = 'https://media.giphy.com/media/YSYyCl3ppK1nG/giphy.gif';
+var edelweissGiphy = 'https://media.giphy.com/media/8cA3oJ3QwEzgk/giphy.gif';
+var seasonsGiphy = 'https://media.giphy.com/media/12Qc9VT7OONl4s/giphy.gif';
+var starsGiphy = 'https://media.giphy.com/media/l46C63jtOQF84VJLO/giphy.gif';
+var currentGiphy;
+
 //Create an object for each trivia question.
 const question1 = {
   question: "Which of the following Disney films was NOT adapted for the stage?",
@@ -8,7 +22,7 @@ const question1 = {
 };
 
 const question2 = {
-  question: "What is the name of the musical set in the land of Oz BEFORE the arrival of Dorothy?",
+  question: "This musical is set in the land of Oz  BEFORE  the arrival of Dorothy.",
   wrong1: "Land of Oz",
   wrong2: "Witches and Wizards",
   wrong3: "The Yellow Brick Road",
@@ -42,7 +56,7 @@ const question5 = {
 var answerArray = [];
 
 //Creating a counter.
-var roundCounter = 1;
+var roundCounter = 0;
 var currentQuestionArray = [];
 var answerDisplay = $('.answer-child');
 
@@ -63,6 +77,7 @@ var shuffleFunction = function (myKeys) {
   return answerArray;
 };
 
+//variables marking the major display sections of the DOM, by ID.
 var timerDisplay = $('#timer-display');
 var slidingObject = $('#sliding-object');
 var questionDisplay = $('#questionDiv');
@@ -129,34 +144,46 @@ var stopwatch = {
 var checkRound = function () {
   if (roundCounter === 1) {
     currentQuestionArray = question1;
+    currentAudio = colorsAudio;
+    currentGiphy = colorsGiphy;
   }
   else if (roundCounter === 2) {
     currentQuestionArray = question2;
+    currentAudio = forGoodAudio;
+    currentGiphy = forGoodGiphy;
   }
   else if (roundCounter === 3) {
     currentQuestionArray = question3;
+    currentAudio = starsAudio;
+    currentGiphy = starsGiphy;
   }
   else if (roundCounter === 4) {
     currentQuestionArray = question4;
+    currentAudio = edelweissAudio;
+    currentGiphy = edelweissGiphy;
   }
   else if (roundCounter === 5) {
-    currentQuestionArray === question5;
+    currentQuestionArray = question5;
+    currentAudio = seasonsAudio;
+    currentGiphy = seasonsGiphy;
   }
   else {
     //need to run a function to end the game
-  }
+    alert('all done');
+  };
 };
 
 var playGame = function () {
+  roundCounter++;
   checkRound();
   stopwatch.start();
   slidingObject.text('o');
   timerDisplay.text(currentTime);
 
   shuffleFunction(currentQuestionArray);
-  roundCounter++;
+
   questionDisplay.text(currentQuestionArray.question);
-  $('#answer-display').children().text('');
+  $('#answer-display').children().text('').removeClass('tracking-in-expand-fwd');
   setTimeout(function () {
     $('#aDiv').text(currentQuestionArray[answerArray[0]]).attr('class', 'tracking-in-expand-fwd answer-child pointer hover');
   }, 1500);
@@ -168,7 +195,7 @@ var playGame = function () {
   }, 2500);
   setTimeout(function () {
     $('#dDiv').text(currentQuestionArray[answerArray[3]]).attr('class', 'tracking-in-expand-fwd answer-child pointer hover');
-  }, 2500);
+  }, 3000);
 };
 
 $(document).ready(function () {
@@ -186,31 +213,43 @@ $(document).ready(function () {
           stopwatch.stop();
           slidingObject.empty();
           questionDisplay.text('Correct!');
-
           // Is there a way to empty the other divs?
-          $('#answer-display').children().not($(this)).empty().removeClass('hover');
+          $('#answer-display').children().empty().removeClass('hover', 'tracking-in-expand-fwd');
+          $('#cDiv').text(currentQuestionArray.right);
+          //need to play the image and sound snippet, possibly need to use .append and add attr 'class' 'animation'.
+          $('#giphyDiv').append('<img src=' + currentGiphy + '>');
+          currentAudio.play();
+
+
           setTimeout(() => {
             questionDisplay.text('Next question coming up...');
-          }, 1900);
+          }, 7000);
           setTimeout(() => {
+            $('#giphyDiv').empty();
             playGame();
-          }, 4000);
+          }, 11000);
         }
         else {
           stopwatch.stop();
           slidingObject.empty();
           questionDisplay.text('Oh, sorry. That\'s not correct.');
-          $('#answer-display').children().not($(this)).empty();
+          $('#answer-display').children().empty().removeClass('hover', 'tracking-in-expand-fwd');
+
           setTimeout(() => {
             questionDisplay.text('This is the one you wanted...');
-            $(this).text(currentQuestionArray.right).css('color', 'red');
+            $('#cDiv').text(currentQuestionArray.right);
+            $('#giphyDiv').append('<img src=' + currentGiphy + '>');
+            currentAudio.play();
           }, 2000);
+
           setTimeout(() => {
             questionDisplay.text('Next question coming up...');
           }, 5000);
+
           setTimeout(() => {
+            $('#giphyDiv').empty();
             playGame();
-          }, 7100);
+          }, 12000);
         }
       });
     })
