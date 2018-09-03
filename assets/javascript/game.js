@@ -59,6 +59,8 @@ var answerArray = [];
 var roundCounter = 0;
 var currentQuestionArray = [];
 var answerDisplay = $('.answer-child');
+var wins = 0;
+var losses = 0;
 
 //Using the Fisher-Yates Shuffle after first shifting the "question" key off.
 var shuffleFunction = function (myKeys) {
@@ -169,7 +171,10 @@ var checkRound = function () {
   }
   else {
     //need to run a function to end the game
-    alert('all done');
+    stopwatch.stop();
+    slidingObject.empty();
+    timerDisplay.empty();
+    questionDisplay.text('All done. You beat the clock. Not a bad score!');
   };
 };
 
@@ -177,7 +182,7 @@ var playGame = function () {
   roundCounter++;
   checkRound();
   stopwatch.start();
-  slidingObject.text('o');
+  slidingObject.text('l');
   timerDisplay.text(currentTime);
 
   shuffleFunction(currentQuestionArray);
@@ -205,11 +210,15 @@ $(document).ready(function () {
 
     $('.btn').click(function () {
       $('.button-spacer').empty();
+      $('#losses').text('Incorrect: '+ losses);
+      $('#wins').text('Correct: ' + wins);
       playGame();
 
       // checkAnswer();
       $('.answer').click(function () {
         if ($(this).text() === currentQuestionArray.right) {
+          wins++;
+          $('#wins').text('Correct: ' + wins);
           stopwatch.stop();
           slidingObject.empty();
           questionDisplay.text('Correct!');
@@ -230,6 +239,8 @@ $(document).ready(function () {
           }, 11000);
         }
         else {
+          losses++;
+          $('#losses').text('Incorrect: '+ losses);
           stopwatch.stop();
           slidingObject.empty();
           questionDisplay.text('Oh, sorry. That\'s not correct.');
