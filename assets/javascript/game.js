@@ -62,6 +62,8 @@ var answerDisplay = $('.answer-child');
 var wins = 0;
 var losses = 0;
 
+var startGame;
+
 //Using the Fisher-Yates Shuffle after first shifting the "question" key off.
 var shuffleFunction = function (myKeys) {
 
@@ -79,6 +81,15 @@ var shuffleFunction = function (myKeys) {
   return answerArray;
 };
 
+var endGame = function () {
+  stopwatch.stop();
+  slidingObject.empty();
+  timerDisplay.empty();
+  $('#answer-display').empty();
+  $('#giphyDiv').empty();
+  questionDisplay.text('All done. You beat the clock. Not a bad score!');
+};
+
 //variables marking the major display sections of the DOM, by ID.
 var timerDisplay = $('#timer-display');
 var slidingObject = $('#sliding-object');
@@ -91,7 +102,14 @@ var timeOut = function () {
   slidingObject.empty();
   questionDisplay.empty();
   $('#answer-display').empty();
-  timerDisplay.text('Oh no. You\'ve run out of time!');
+  timerDisplay.text('Oh no. You\'ve run out of time! Press the "Start" button to try again.');
+  $('.button-spacer').html('<button type="button" class="btn btn-lg">Start!</button>');
+  $('.btn').click(function () {
+    $('.button-spacer').empty();
+    $('#losses').text('Incorrect: ' + losses);
+    $('#wins').text('Correct: ' + wins);
+    startGame();
+  });
 };
 
 //variables and included functions to run and display the timer.
@@ -171,10 +189,7 @@ var checkRound = function () {
   }
   else {
     //need to run a function to end the game
-    stopwatch.stop();
-    slidingObject.empty();
-    timerDisplay.empty();
-    questionDisplay.text('All done. You beat the clock. Not a bad score!');
+
   };
 };
 
@@ -205,12 +220,20 @@ var playGame = function () {
 
 $(document).ready(function () {
   slidingObject.empty();
-  var startGame = function () {
+  startGame = function () {
+    $('.button-spacer').html('<button type="button" class="btn btn-lg">Start!</button>');
+    stopwatch.time = 60;
+    roundCounter = 0;
+    wins = 0;
+    losses = 0;
+    answerArray = [];
+    currentQuestionArray = [];
+
     timerDisplay.text('Welcome! Go ahead and click the "Start" button when you\'re ready to play!');
 
     $('.btn').click(function () {
       $('.button-spacer').empty();
-      $('#losses').text('Incorrect: '+ losses);
+      $('#losses').text('Incorrect: ' + losses);
       $('#wins').text('Correct: ' + wins);
       playGame();
 
@@ -229,18 +252,24 @@ $(document).ready(function () {
           $('#giphyDiv').append('<img src=' + currentGiphy + '>');
           currentAudio.play();
 
-
-          setTimeout(() => {
-            questionDisplay.text('Next question coming up...');
-          }, 7000);
-          setTimeout(() => {
-            $('#giphyDiv').empty();
-            playGame();
-          }, 11000);
+          if (roundCounter === 5) {
+            setTimeout(() => {
+              endGame();
+            }, 7000);
+          }
+          else {
+            setTimeout(() => {
+              questionDisplay.text('Next question coming up...');
+            }, 7000);
+            setTimeout(() => {
+              $('#giphyDiv').empty();
+              playGame();
+            }, 11000);
+          };
         }
         else {
           losses++;
-          $('#losses').text('Incorrect: '+ losses);
+          $('#losses').text('Incorrect: ' + losses);
           stopwatch.stop();
           slidingObject.empty();
           questionDisplay.text('Oh, sorry. That\'s not correct.');
